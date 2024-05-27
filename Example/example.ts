@@ -66,7 +66,7 @@ const startSock = async() => {
 		}
 
 		const phoneNumber = await question('Please enter your mobile phone number:\n')
-		const code = await sock.requestPairingCode(phoneNumber)
+		const code = await sock.getPairingCode(phoneNumber)
 		console.log(`Pairing code: ${code}`)
 	}
 

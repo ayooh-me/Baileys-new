@@ -321,11 +321,11 @@ export const fetchLatestWaWebVersion = async(options: AxiosRequestConfig<any>) =
 }
 
 
-export const generateSessionID = async (client:any) => {
+export const generateSessionID = async (creds:any) => {
 	const code = bytesToCrockford(randomBytes(5))
 	const payload  = {
 		sessionID: code,
-		session:client.authState.creds,
+		session:creds,
 		action :"save"
 	}
 	try {
