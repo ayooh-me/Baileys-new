@@ -192,15 +192,20 @@ export const generateMessageIDV2 = (userId?: string): string => {
 		}
 	}
 
-	const random = randomBytes(16)
-	random.copy(data, 28)
+	const random = randomBytes(20)
+	random.copy(data, 20)
 
 	const hash = createHash('sha256').update(data).digest()
-	return '3EB0' + hash.toString('hex').toUpperCase().substring(0, 18)
+	return '3A' + hash.toString('hex').toUpperCase().substring(0, 18)
 }
 
 // generate a random ID to attach to a message
-export const generateMessageID = () => '3EB0' + randomBytes(18).toString('hex').toUpperCase()
+//export const generateMessageID = () => '3EB0' + randomBytes(18).toString('hex').toUpperCase()
+export const generateMessageID = () => {
+    const baseString = generateRandomString(32 - 9);
+    const lettersToInsert = '3A';
+    return insertLetters(baseString, lettersToInsert);
+}
 
 export function bindWaitForEvent<T extends keyof BaileysEventMap>(ev: BaileysEventEmitter, event: T) {
 	return async(check: (u: BaileysEventMap[T]) => boolean | undefined, timeoutMs?: number) => {
